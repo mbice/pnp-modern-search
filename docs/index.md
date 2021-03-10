@@ -1,77 +1,85 @@
-# PnP Modern Search solution #
+!["PnP"](https://pnp.github.io/images/hero-parker-p-1080.png){: .center .logo}
 
-## Solution overview
+# PnP Modern Search v4
 
-![Solution demo](./images/react-search-refiners.gif)
+The PnP 'Modern Search' solution is a set of SharePoint Online modern Web Parts allowing SharePoint super users, webmasters and developers to create highly flexible and personalized search based experiences in minutes.
 
-## Current version
+**Looking for the v3 documentation? [Here you go!](./v3/index.md)**
 
-![Current version](https://img.shields.io/badge/version-3.15.3-green.svg)
+!!! important "PnP Modern Search v3.x deprecation"
+    **The v4 version uses a brand new code architecture and replaces the older v3 codebase**. There will be no new features added to v3.x, but we will continue to
+    provide bug fixes as needed. Because v4.x is not at feature parity yet with v3.x, you can still use the v3.x packages to meet your requirements. Also, there is not an
+    auto-upgrade path from v3 to v4 due to the new architecture, so you are perfectly ok
+    to stay on the v3 version until v4 provides the features validating your upgrade.
+    However, the main focus is on the v4 version, and new search functionality backed by the Microsoft Graph Search API will be v4 only.
 
-**Get the latest release at our [releases page](https://github.com/microsoft-search/pnp-modern-search/releases/latest).**
-
-## Summary
-
-This solution allows you to build user friendly SharePoint search experiences using SPFx in the modern interface. The main features include:
-
-- Fully customizable SharePoint search query like the good old Content Search Web Part.
-- Can either use a static query or be connected to a search box component using SPFx dynamic data.
-- Live templating system with Handlebar to meet your requirements in terms of UI + built-in layouts. Can also use template from an external file.
-- Search results including previews for Office documents and Office 365 videos.
-- Customizable refiners supporting multilingual values for taxonomy based filters.
-- Sortable results (unique field).
-- Refiners Web Part.
-- SharePoint best bets support.
-- Search query enhancement with NLP tools (like Microsoft LUIS).
-- Extensibility model allowing to write your own components.
-
-A complete 1 hour tutorial video is available on the [official SharePoint Developer blog](https://developer.microsoft.com/en-us/sharepoint/blogs/pnp-webcast-sharepoint-framework-modern-search-web-part/):
-
-<a href="https://www.youtube.com/watch?v=g41nvRVwtds" target="_blank"><img src="http://img.youtube.com/vi/g41nvRVwtds/maxresdefault.jpg"/></a>
+    **v3 and v4 don't share the same package name, Web Part and solution IDs meaning you can have them side by side on a page if necessary without overlap.**
+    
+    !["V3 & v4"](./assets/v3_v4.png){: .center}
 
 ## What's included?
 
-### Search Web Parts
+The solution includes the following Web Parts:
 
-SPFx solution `search-parts` including a complete set of SharePoint search Web Parts like a search results, search box, etc.
+| Component | Description |
+| --------- | ----------- |
+| **[Search Results](./usage/search-results/index.md)** | Retrieve data from a data source and render them in a specific layout.
+| **[Search Filters](./usage/search-filters/index.md)** | Filter and refine data displayed in 'Search Results' Web Parts.
+| **[Search Verticals](./usage/search-verticals/index.md)** | Browse data as silos (i.e. tabs) from multiple data sources.
+| **[Search box](./usage/search-box/index.md)** | Let users enter free text queries sent to 'Search Results' Web Parts.
 
-See [documentation](./search-parts/getting-started.md).
+## Supported browsers
 
-### Search extensibility library
+Here is the list of supported browsers:
 
-A SPFx library component project `search-extensibility-library` allowing to create custom React components wrapped as web components to be included in the search results Web Part Handlebars templates when you require complex dynamic behavior at a granular component level.
+- Chrome
+- Firefox
+- Edge
+- Edge Chromium
+- Brave
 
-See [documentation](./search-extensibility-library/getting-started.md).
+**We don't support Internet Explorer 11**. We think there are plenty of other options for enteprise scenarios in the market. Maybe it's time to move on. For developers, it represents an **huge** ammount of time to make the solution compatible for a very low benefit. Hope you understand, ain't personal ;).
 
-### Search custom renderer
+## Extensibility model
 
-A SPFx application customizer project `search-custom-renderer` allowing to completly override the results display using an unique React component.
+By getting this solution, you also benefit from an advanced [extensibility model](./extensibility/index.md) allowing you to customize the solution according to your requirements if default features don't do the job for you. 
 
-See [documentation](./search-custom-renderer/getting-started.md).
+**The supported extensions are:**
 
-### Search query enhancer
+- [Custom web components](./extensibility/custom_web_component.md).
+- [Custom suggestions providers](./extensibility/custom_suggestions_provider.md).
+- [Custom Handlebars customization (helpers, partials, etc.)](./extensibility/handlebars_customizations.md).
 
-A sample Azure function project `search-query-enhancer`to demonstrate the use of Microsoft LUIS and other cognitive services to interpret user intents and enhance the search box query accordingly.
+With these available customizations options, you can do pretty much anything!
 
-See [documentation](./search-query-enhancer/getting-started.md).
+!!! note
+    Extensibility samples are centralized in a dedicated repository: [https://github.com/microsoft-search/pnp-modern-search-extensibility-samples/tree/main](https://github.com/microsoft-search/pnp-modern-search-extensibility-samples/tree/main). Use them to get started to create your own or reuse existing samples in your projects.
 
-## Applies to
+## Troubleshooting
 
-* [SharePoint Framework](https:/dev.office.com/sharepoint)
-* [Office 365 tenant](https://dev.office.com/sharepoint/docs/spfx/set-up-your-development-environment)
+If you encounter an issue, please use the GitHub issues list of [this repository](https://github.com/microsoft-search/pnp-modern-search/issues). Also, to help us to resolve your issue, you can include screenshots or error messages coming from:
 
-## Important notice on upgrading the solution from pre v2.2.0.0
-**Due to code restructuring we have hit an edge case which impacts upgrades from previous versions. To solve the issue go to `https://<tenant>.sharepoint.com/sites/<appcatalog>/Lists/ComponentManifests` and remove the entries for SearchBox and Search Results, and then upload the .sppkg for the new release.**
+- The faulty Web Part itself. 
+- Errors displayed in the browser console (typically pressing F12).
+- Errors displayed in the SharePoint console (pressing CTRL+F12)
 
-**Next you need to loop over all sites which have the web parts installed, and upgrade the App on those sites. Now the web parts should work on new and existing sites. You may use the PnP command `Update-PnPApp` to update the application.**
+## Issues, questions, feedback?
 
-**If you have deployed the solution as a tenant wide extension, this should not impact you.**
+For any issue, question or feedback, please the [official GitHub repository](https://github.com/microsoft-search/pnp-modern-search/issues). We will be happy to help you!
 
-## Important notice on upgrading the solution from pre v3.0.0.0
+## About
 
-**Because this version introduces a new standalone search filters Web Part, you will have to reconfigure all previous refiners from the search results Web Part to this new Web Part. You can get the previous layout for filters by selecting the 'Panel' layout in the new Web Part property pane.**
+PnP Modern Search version 4 initially made by [Franck Cornu](https://twitter.com/FranckCornu) based on a fork of the [@aequos 'Modern Data Visualizer'](https://www.aequos.ca/) solution.
 
-## Disclaimer
-**THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
+## Maintainers & contributors
 
-<img src="https://telemetry.sharepointpnp.com/microsoft-search/pnp-modern-search" />
+Here is the list of main contributors of the PnP Modern Search (all versions included)
+
+- Franck Cornu (aequos) - [@FranckCornu](http://www.twitter.com/FranckCornu)
+- Mikael Svenson (Microsoft) - [@mikaelsvenson](http://www.twitter.com/mikaelsvenson)
+- Yannick Reekmans - [@yannickreekmans](https://twitter.com/yannickreekmans)
+- Albert-Jan Schot - [@appieschot](https://twitter.com/appieschot)
+- Tarald Gåsbakk (PuzzlePart) - [@taraldgasbakk](https://twitter.com/Taraldgasbakk)
+- Brad Schlintz (Microsoft) - [@bschlintz](https://twitter.com/bschlintz)
+- Richard Gigan - [@PooLP](https://twitter.com/PooLP)
+- Matthew Stark
